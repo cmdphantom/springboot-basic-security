@@ -42,15 +42,23 @@ public class SpringSecurityConfig
 	}*/
 	
 	//Case#2B - Allowed AUTH  ONLY!!!   "/auth" -****ADMIN ONLY****
-		@Override
+		/*@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.csrf().disable();
 			http.authorizeRequests()
 			.antMatchers("/auth/**")
 			.hasAnyRole("ADMIN").anyRequest()
 			.fullyAuthenticated().and().httpBasic();
-		}
+		}*/
 	
+	//Case-3 Access from Angular Login Page...Any URL will be allowed.
+		@Override
+		protected void configure(HttpSecurity http) throws Exception {
+			http.cors(); //Allow Angular to Access
+			http.csrf().disable()
+				.authorizeRequests().antMatchers("/**")
+				.fullyAuthenticated().and().httpBasic();
+		}
 	
 	
 	@Bean
