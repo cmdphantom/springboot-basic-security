@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,13 +17,14 @@ public class SpringSecurityConfig
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-					.withUser("Roddur").password("p")
+					.withUser("Roddur").password("{noop}p") // M-2 "{noop}p"
 					.roles("ADMIN");  //ADMIN Role
 		
 		auth.inMemoryAuthentication()
-				.withUser("Swagata").password("p")
+				.withUser("Swagata").password("{noop}p")
 				.roles("USER"); //USER Role ....
-	}
+		 
+		}
 	
 	
 	
@@ -51,21 +53,34 @@ public class SpringSecurityConfig
 			.fullyAuthenticated().and().httpBasic();
 		}*/
 	
-	//Case-3 Access from Angular Login Page...Any URL will be allowed.
+	//Case-3 M-1  Access from Angular Login Page...Any URL will be allowed.
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.cors(); //Allow Angular to Access
-			http.csrf().disable()
-				.authorizeRequests().antMatchers("/**")
+			http.csrf().disable();
+			http.authorizeRequests().antMatchers("/**")
 				.fullyAuthenticated().and().httpBasic();
 		}
+		
+	//CASE-3 M-2 Access from Angular Login Page	
+		/*@Override
+		protected void configure(HttpSecurity http) throws Exception {
+			http.cors(); //Allow Angular to Access
+			http.csrf().disable().
+					authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**")
+					.permitAll().anyRequest().authenticated()
+					.and().httpBasic();
+		}*/
+
 	
-	
-	@Bean
+	/*
+	 * Alternatively use .password("{noop}p")  
+	 */ 
+	/*@Bean
 	private static NoOpPasswordEncoder passwordEncoder() {
 		return (NoOpPasswordEncoder)NoOpPasswordEncoder.getInstance();
 
-	}
+	}*/
 	
 	
 }
