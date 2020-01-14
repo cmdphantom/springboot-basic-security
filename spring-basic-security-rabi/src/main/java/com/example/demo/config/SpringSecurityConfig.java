@@ -1,4 +1,4 @@
-package com.example.demo.config;
+/*package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,28 +30,28 @@ public class SpringSecurityConfig
 	
 	
 	// Case#1 - Allowed Any URL  (Auth+No Auth ) .."/auth" and "/noAuth"
-	/*@Override
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic();
-	}*/
+	}
 	
 	//Case#2A - Allowed AUTH  ONLY!!!   "/auth" -****ADMIN+USER Role****
-	/*@Override
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests().antMatchers("/auth/**").fullyAuthenticated().and().httpBasic();
-	}*/
+	}
 	
 	//Case#2B - Allowed AUTH  ONLY!!!   "/auth" -****ADMIN ONLY****
-		/*@Override
+		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.csrf().disable();
 			http.authorizeRequests()
 			.antMatchers("/auth/**")
 			.hasAnyRole("ADMIN").anyRequest()
 			.fullyAuthenticated().and().httpBasic();
-		}*/
+		}
 	
 	//Case-3 M-1  Access from Angular Login Page...Any URL will be allowed.
 		@Override
@@ -63,24 +63,25 @@ public class SpringSecurityConfig
 		}
 		
 	//CASE-3 M-2 Access from Angular Login Page	
-		/*@Override
+		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.cors(); //Allow Angular to Access
 			http.csrf().disable().
 					authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**")
 					.permitAll().anyRequest().authenticated()
 					.and().httpBasic();
-		}*/
+		}
 
 	
-	/*
+	
 	 * Alternatively use .password("{noop}p")  
-	 */ 
-	/*@Bean
+	  
+	@Bean
 	private static NoOpPasswordEncoder passwordEncoder() {
 		return (NoOpPasswordEncoder)NoOpPasswordEncoder.getInstance();
 
-	}*/
+	}
 	
 	
 }
+*/
